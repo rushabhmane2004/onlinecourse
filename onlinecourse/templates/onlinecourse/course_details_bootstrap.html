@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>{{ course.name }}</title>
+</head>
+<body>
+<div class="container mt-5">
+    <h2>{{ course.name }}</h2>
+    <hr>
+    {% for lesson in course.lesson_set.all %}
+    <div class="card mb-2">
+        <div class="card-body"><h5>{{ lesson.title }}</h5><p>{{ lesson.content }}</p></div>
+    </div>
+    {% endfor %}
+    <a href="{% url 'onlinecourse:submit' course.id %}" class="btn btn-success mt-3">Start Exam</a>
+</div>
+<form action="{% url 'onlinecourse:submit' course.id %}" method="post">
+    {% csrf_token %}
+    {% for question in course.question_set.all %}
+        <fieldset class="form-group">
+            <legend class="form-group-label">{{ question.content }}</legend>
+            {% for choice in question.choice_set.all %}
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="checkbox" name="choice" class="form-check-input" value="{{ choice.id }}">
+                        {{ choice.content }}
+                    </label>
+                </div>
+            {% endfor %}
+        </fieldset>
+    {% endfor %}
+    <input type="submit" class="btn btn-primary" value="Submit Exam">
+</form>
+</body>
+</html>

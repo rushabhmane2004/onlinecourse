@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Exam Result</title>
+</head>
+<body>
+<div class="container mt-5 text-center">
+    <div class="alert alert-success">
+        <h1>Congratulations!</h1>
+        <h3>You have completed the exam for {{ course.name }}</h3>
+        <p class="lead">Your Score: <strong>{{ grade }}</strong></p>
+    </div>
+    <a href="{% url 'onlinecourse:index' %}" class="btn btn-primary">Back to Courses</a>
+</div>
+</body>
+</html>
