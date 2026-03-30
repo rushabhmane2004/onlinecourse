@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{% url 'onlinecourse:index' %}">Home</a>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid">
+    <h2>{{ course.name }}</h2>
+    <div class="card-columns-vertical">
+        {% for lesson in course.lesson_set.all %}
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ lesson.title }}</h5>
+                    <p class="card-text">{{ lesson.content }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <a class="btn btn-primary" href="{% url 'onlinecourse:submit' course.id %}">Start Exam</a>
+</div>
+</body>
+</html>
