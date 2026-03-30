@@ -5,13 +5,22 @@
     <title>Exam Result</title>
 </head>
 <body>
-<div class="container mt-5 text-center">
+<div class="container mt-5">
     <div class="alert alert-success">
         <h1>Congratulations!</h1>
         <h3>You have completed the exam for {{ course.name }}</h3>
-        <p class="lead">Your Score: <strong>{{ grade }}</strong></p>
+        <p>Your Score: <strong>{{ grade }}</strong></p>
     </div>
-    <a href="{% url 'onlinecourse:index' %}" class="btn btn-primary">Back to Courses</a>
+    <h4>Exam Results:</h4>
+    <ul class="list-group">
+        {% for question in course.question_set.all %}
+        <li class="list-group-item">
+            <strong>Question: {{ question.content }}</strong><br>
+            <span class="text-success">Correct Answer(s) are listed in the system.</span>
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'onlinecourse:index' %}" class="btn btn-primary mt-3">Back to Courses</a>
 </div>
 </body>
 </html>
